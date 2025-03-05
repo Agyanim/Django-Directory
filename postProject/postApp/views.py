@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .form import UserForm
 
 # Create your views here.
@@ -16,5 +16,9 @@ def createUser(request):
         form = UserForm(request.POST)
         if form.is_valid():
             form.save()
+            return redirect('create-user')
+           
+        else:
+            return render(request, 'postApp/create-user.html', {'form': form})
     context= {'form': form}
     return render(request, 'postApp/create-user.html', context)
