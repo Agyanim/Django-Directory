@@ -12,7 +12,7 @@ db.sqlite3
 # Distribution / packaging
 .Python
 env/
-postApp/
+postenv/
 build/
 develop-eggs/
 dist/

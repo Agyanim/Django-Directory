@@ -36,7 +36,7 @@ virtualenvwrapper-win==1.2.7
 
 
 #########Key Notes #################
-pip install -r requirements.txt
+
 
 pip freeze > requirement.txt
 

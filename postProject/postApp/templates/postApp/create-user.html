@@ -1,0 +1,30 @@
+{% load static tailwind_tags %} {% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Create user</title>
+
+		{% tailwind_css %}
+	</head>
+	<body>
+		
+		<section class="w-full flex flex-col justify-center items-center h-screen">
+            <h1 class="text-green-900 text-2xl font-bold mb-5 text-center">Create user</h1>
+            <div class="w-[30%] bg-gradient-to-tr from-green-900 to-green-300 h-[45%] flex justify-center flex-c rounded-lg">
+    
+			<form class="w-[90%] m-auto flex flex-col justify-center" method="POST" action="{% url 'create-user' %}">
+				{% csrf_token %}
+				<div class=" flex flex-col space-y-4 mb-5 ">
+					{% render_field form.username placeholder='Username' class='text-gray-500 rounded' %} 
+                    {% render_field form.email placeholder="email" class='text-gray-500 rounded'  %} 
+                    {% render_field form.password placeholder="password" class='text-gray-500 rounded'  %}
+				</div>
+
+				<button class="bg-black text-white font-bold rounded-md text-center py-2 w-[5rem] m-auto" type="submit">submit</button>
+			</form>
+        </div>
+		</section>
+	</body>
+</html>
