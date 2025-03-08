@@ -10,15 +10,15 @@ def index(request):
 def login(request):
     return render(request, 'postApp/login.html')
 
-def createUser(request):
+def signup(request):
     form = UserForm()
     if request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('create-user')
+            return redirect('signup')
            
         else:
-            return render(request, 'postApp/create-user.html', {'form': form})
+            return render(request, 'postApp/signup.html', {'form': form})
     context= {'form': form}
-    return render(request, 'postApp/create-user.html', context)
+    return render(request, 'postApp/signup.html', context)

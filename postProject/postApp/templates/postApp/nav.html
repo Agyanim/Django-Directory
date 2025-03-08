@@ -1,0 +1,22 @@
+{% load tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nav Bar</title>
+
+    {% tailwind_css %}
+</head>
+<body>
+    <nav class="flex  mx-10 mt-10 justify-between">
+        <div class="w-14"><a href="{% url 'index' %}"><img class=" w-full rounded-full" src="{% static 'postApp/images/logo_1.png' %}" alt="logo"></a></div>
+        <ul class="flex space-x-5 text-green-950 font-bold">
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="">About</a></li>
+            <li><a href="{% url 'signup' %}">Signup/Login</a></li>
+        </ul>
+    </nav>
+</body>
+</html>
