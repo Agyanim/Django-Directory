@@ -9,10 +9,11 @@
         <div class="w-[35%] bg-gradient-to-tr from-green-900 to-green-300 h-[18rem] flex flex-col rounded-lg">
             <h1 class="text-white  text-2xl font-bold 
 				text-center py-5">Login</h1>
-        <form class="w-[90%] m-auto flex flex-col h-full" action="">
+        <form class="w-[90%] m-auto flex flex-col h-full" action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
             <div class="flex flex-col space-y-3">
-            <input class="text-gray-500 rounded" type="text" placeholder="username" required>
-            <input class="text-gray-500 rounded" type="password" placeholder="password" required>
+            <input class="text-gray-500 rounded" name="username" type="text" placeholder="username" required>
+            <input class="text-gray-500 rounded" name="password" type="password" placeholder="password" required>
         </div>
         <button class="bg-black text-white font-bold rounded-md text-center py-2 w-[5rem] m-auto" type="submit">login</button>
         </form>
