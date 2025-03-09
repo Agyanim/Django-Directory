@@ -5,7 +5,11 @@ from .form import UserForm
 
 
 def index(request):
-    return render(request, 'main.html')
+    return render(request, 'postApp/home.html')
+
+
+def about(request):
+    return render(request, 'postApp/about.html')
 
 def login(request):
     if request.method == 'POST':

@@ -11,8 +11,10 @@
 </head>
 <body>
     {% include 'postApp/nav.html' %}
+    {% block header %} <h1>Welcome to Knowledge Hub!</h1> {% endblock %}
+    
     {% block content %}
-    <h1 class="text-4xl font-bold text-blue-500 ">Home Page</h1>
+    
     {% endblock %}
 
     
