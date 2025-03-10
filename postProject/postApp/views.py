@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
 from .form import UserForm
+from django.contrib import messages
+from django.contrib import auth
+
 
 # Create your views here.
 
@@ -13,8 +16,20 @@ def about(request):
 
 def login(request):
     if request.method == 'POST':
-        # data=request.POST
-        print(request.POST)
+        username=request.POST['username']
+        password=request.POST['password']
+        if username == "":
+            messages.info(request,'Username field cannot be empty')
+            return redirect('login')
+        elif password == '':
+            messages.info(request,'Password field cannot be empty')
+            return redirect('login')
+        else:  
+            user=auth.authenticate(request,username=username, password=password)
+            if user is not None:
+                auth.login(request,user)
+            else:
+                messages.info(request, 'Username or password incorrect') 
     return render(request, 'postApp/login.html')
 
 def signup(request):
