@@ -28,6 +28,7 @@ def login(request):
             user=auth.authenticate(request,username=username, password=password)
             if user is not None:
                 auth.login(request,user)
+                return redirect('posts')
             else:
                 messages.info(request, 'Username or password incorrect') 
     return render(request, 'postApp/login.html')
@@ -43,3 +44,6 @@ def signup(request):
             return render(request, 'postApp/signup.html', {'form': form})
     context= {'form': form}
     return render(request, 'postApp/signup.html', context)
+
+def posts(request):
+    return render(request,'postApp/posts.html')
