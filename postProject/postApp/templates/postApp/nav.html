@@ -10,12 +10,16 @@
     {% tailwind_css %}
 </head>
 <body>
-    <nav class="flex  mx-10 mt-10 justify-between">
+    <nav class="flex  mx-10 mt-5 justify-between">
         <div class="w-14"><a href="{% url 'index' %}"><img class=" w-full rounded-full" src="{% static 'postApp/images/logo_1.png' %}" alt="logo"></a></div>
         <ul class="flex space-x-5 font-bold text-[1.2rem] text-green-800">
             <li><a href="{% url 'index' %}">Home</a></li>
             <li><a href="{% url 'about' %}">About</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
             <li><a href="{% url 'signup' %}">Signup/Login</a></li>
+            {% endif %}
         </ul>
     </nav>
 </body>
