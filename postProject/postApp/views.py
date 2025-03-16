@@ -39,13 +39,14 @@ def signup(request):
     context= {'form': form}
     if request.method == 'POST':        
         email=request.POST['email']
+        username=request.POST['username']
         is_user = None       
         if email == "":
             messages.warning(request,"Email field cannot be empty")
             return redirect("signup")
-        is_user = User.objects.filter(email=email).exists()
+        is_user = User.objects.filter(email=email).exists() or User.objects.filter(username=username).exists()
         if is_user:
-            messages.warning(request,'User already exit')
+            messages.warning(request,'Username or Email already taken')
             return redirect("signup")
         form = UserForm(request.POST) 
         if form.is_valid():
