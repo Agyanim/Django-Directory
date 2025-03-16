@@ -37,33 +37,21 @@ def login(request):
 def signup(request):
     form = UserForm()
     context= {'form': form}
-    
-    if request.method == 'POST':
-        
-        # username=request['username']
-        # email=request['email']
-        # password=request['password']
-        # is_user = None
-        
-        # if username=="":
-        #     return messages.warning(request,"Username cannot be empty")
-        # elif email == "":
-        #     return messages.warning(request,"Email cannot be empty")
-        # elif password == "" or len(password) > 6:
-        #     return messages.warning(request,'Password cannot be empty or less than 6 characters')
-        # else:
-        #     is_user=User.objects.filter(email=email).exists()
-        #     print(is_user)
-                
-            
-         
+    if request.method == 'POST':        
+        email=request.POST['email']
+        is_user = None       
+        if email == "":
+            messages.warning(request,"Email field cannot be empty")
+            return redirect("signup")
+        is_user = User.objects.filter(email=email).exists()
+        if is_user:
+            messages.warning(request,'User already exit')
+            return redirect("signup")
         form = UserForm(request.POST) 
         if form.is_valid():
             form.save()
             return redirect('login')      
-        else:
-            return render(request, 'postApp/signup.html', context)
-    
+        return redirect("signup")
     return render(request, 'postApp/signup.html', context)
 
 def logout(request):
