@@ -3,6 +3,8 @@ from .form import UserForm
 from django.contrib import messages
 from django.contrib import auth
 from django.contrib.auth.models import User
+from .models import Post
+
 
 
 # Create your views here.
@@ -60,4 +62,7 @@ def logout(request):
     return redirect("index")
 
 def posts(request):
-    return render(request,'postApp/posts.html')
+    userPosts = Post.objects.all()
+    if userPosts:
+       return render(request,'postApp/posts.html',{"userPosts":userPosts})
+    return render(request,'postApp/posts.html',{"notes":"No post available now"})
