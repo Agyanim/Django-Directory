@@ -4,5 +4,19 @@
 {% block title %} Posts {% endblock %}
 
 {% block content %}
-My Posts
+<section class="h-screen my-5">
+    <a class=" h-screen grid gap-5 m-6 grid-cols-3 grid-rows-3" href="{% url 'posts' %}">
+    {% for post in posts %}
+    <div class="bg-white p-2 rounded-md flex flex-col shadow-sm shadow-emerald-800 hover:scale-105 transition-all">
+        <p>{{post.title|title}} <span class="text-green-700 font-bold">@{{post.created_by}}</span> </p>
+        {% if post.description|length > 50 %}
+        <p>{{post.description|slice:":50"}}...</p>
+        {% else %}
+        <p>{{post.description}}</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+    
+</a>
+</section>
 {% endblock %}

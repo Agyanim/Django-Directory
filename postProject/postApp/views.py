@@ -64,5 +64,10 @@ def logout(request):
 def posts(request):
     userPosts = Post.objects.all()
     if userPosts:
-       return render(request,'postApp/posts.html',{"userPosts":userPosts})
+       return render(request,'postApp/posts.html',{"posts":userPosts})
     return render(request,'postApp/posts.html',{"notes":"No post available now"})
+
+def allPost(request,id):
+    
+    return render(request,'postApp/all-post',{"id":id})
+    
