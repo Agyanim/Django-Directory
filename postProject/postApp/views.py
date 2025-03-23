@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .form import UserForm
+from .form import UserForm,CreatePostForm
 from django.contrib import messages
 from django.contrib import auth
 from django.contrib.auth.models import User
@@ -72,5 +72,7 @@ def editPost(request,id):
     return render(request,'postApp/edit-post.html',{"id":id})
 
 def createPost(request):
-    return render(request,'postApp/create-post.html')
+    form = CreatePostForm
+    context ={"form":form}
+    return render(request,'postApp/create-post.html',context)
     

@@ -7,7 +7,7 @@ class UserForm(ModelForm):
         model = User
         fields = ['username', 'email', 'password']
         
-class CreatePost(ModelForm):
+class CreatePostForm(ModelForm):
     class Meta:
         model=Post
         fields = ["title","description","category"]
