@@ -10,7 +10,6 @@ class Post(models.Model):
     updatedAt = models.DateTimeField(auto_now=True)
     created_by = models.ForeignKey(User,on_delete=models.CASCADE,default=1)
     
-    
     def __str__(self):
         return self.title
     

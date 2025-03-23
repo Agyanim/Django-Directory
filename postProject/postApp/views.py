@@ -67,7 +67,10 @@ def posts(request):
        return render(request,'postApp/posts.html',{"posts":userPosts})
     return render(request,'postApp/posts.html',{"notes":"No post available now"})
 
-def allPost(request,id):
+def editPost(request,id):
     
-    return render(request,'postApp/all-post',{"id":id})
+    return render(request,'postApp/edit-post.html',{"id":id})
+
+def createPost(request):
+    return render(request,'postApp/create-post.html')
     
