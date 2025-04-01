@@ -68,8 +68,30 @@ def posts(request):
     return render(request,'postApp/posts.html',{"notes":"No post available now"})
 
 def editPost(request,id):
+    post_detail = Post.objects.get(id=id)
+    if request.method == "POST":
+        form= CreatePostForm(request.POST, instance=post_detail)
+        if form.is_valid:
+            form.save()
+            return redirect('postDetail',id)
+    else:
+        form=CreatePostForm(instance=post_detail)    
+        context ={
+            "form":form , 
+            "post":post_detail,
+            }
+    return render(request,'postApp/edit-post.html',context)
+
+def postDetails(request,id):
+    form = CreatePostForm
+   
+    post_detail = Post.objects.get(id=id)
+    context ={
+        "form":form , 
+        "post":post_detail,
+        }
     
-    return render(request,'postApp/edit-post.html',{"id":id})
+    return render(request,'postApp/post-details.html',context)
 
 def createPost(request):
     form = CreatePostForm
