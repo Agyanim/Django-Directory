@@ -4,22 +4,22 @@
 {% block title %} Posts {% endblock %}
 
 {% block content %}
-<section class="h-screen my-5">
+<h1 class="text-3xl text-center font-bold text-green-900">POSTS</h1>
+<h2 class="text-center italic font-bold text-xl  hover:scale-105 transition-all absolute right-8 text-blue-950 font-serif top-24 "><a href="{% url 'createPost' %}">New Post</a></h2>
+<section class="h-screen grid grid-cols-3 items-center p-5 gap-4 ">
     {% if posts %}
-    <a class=" h-screen grid gap-5 m-6 grid-cols-3 grid-rows-3" href="{% url 'posts' %}">
-   
     {% for post in posts %}
-    <div class="bg-white p-2 rounded-md flex flex-col shadow-sm shadow-emerald-800 hover:scale-105 transition-all">
-        <p>{{post.title|title}} <span class="text-green-700 font-bold">@{{post.created_by}}</span> </p>
-        {% if post.description|length > 50 %}
-        <p>{{post.description|slice:":50"}}...</p>
-        {% else %}
-        <p>{{post.description}}</p>
-        {% endif %}
-    </div>
-    {% endfor %}
-   
-</a>
+    <div class="w-full">
+        <a class=" p-5 justify-center items-center rounded-md text-justify flex flex-col h-[17rem] shadow-md shadow-green-900 hover:scale-105 transition-all bg-green-200/40 " href="{% url 'postDetail' post.id %}">
+            <p class="p-2 font-bold text-xl">{{post.title|title}} <span class="text-green-700 font-bold">@{{post.created_by}}</span> </p>
+            {% if post.description|length > 350 %}
+            <p>{{post.description|slice:":350"}}...</p>
+            {% else %}
+            <p>{{post.description}}</p>
+            {% endif %}
+            </a>    
+    </div> 
+    {% endfor %}  
 {% else %}
 <div class="bg-white p-2 rounded-md flex flex-col shadow-sm shadow-emerald-800 hover:scale-105 transition-all items-center">
     <p>No posts available</p>

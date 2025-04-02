@@ -7,22 +7,22 @@
 
 {% block content %}
 
-<section class="w-screen bg-gradient-to-r from-green-950 to-black opacity-80 fixed h-screen flex justify-center items-center">
+<section class="flex justify-center items-center mt-[5rem]">
 
-<form  class="w-[30%] m-auto bg-white rounded-md shadow-lg shadow-black" method="post" action="">
+    <form  class="w-[30%] m-auto bg-green-900/5 rounded-md shadow-lg shadow-black " method="POST" action="{% url 'createPost' %}">
+    
+    <div class="flex flex-col p-5 gap-5 ">
+    {% csrf_token %}
+    {% render_field form.title Placeholder='Title' class="rounded-md border-gray-900" %}
+    {% render_field form.description Placeholder='Description' class="rounded-md border-gray-900" %}
+    {% render_field form.category class="rounded-md border-gray-900" %}
+    
+    <input class=" rounded-md shadow-md shadow-black py-2 bg-green-900 text-white font-bold hover:bg-black/50 border-none transition-all" type="submit" value="Create Post">
+    </div>
+    </form>
+    
+    </section>
 
-<div class="flex flex-col p-5 gap-5">
-{% csrf_token %}
-{% render_field form.title placeholder="Title" %}
-{% render_field form.description placeholder="Description" %}
-{% render_field form.category %}
-
-
-<input type="submit" value="Enter">
-</div>
-</form>
-
-</section>
 
 
 {% endblock %}
