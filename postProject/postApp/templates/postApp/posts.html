@@ -5,7 +5,7 @@
 
 {% block content %}
 <h1 class="text-3xl text-center font-bold text-green-900">POSTS</h1>
-<h2 class="text-center italic font-bold text-xl  hover:scale-105 transition-all absolute right-8 text-blue-950 font-serif top-24 "><a href="">New Post</a></h2>
+<h2 class="text-center italic font-bold text-xl  hover:scale-105 transition-all absolute right-8 text-blue-950 font-serif top-24 "><a href="{% url 'createPost' %}">New Post</a></h2>
 <section class="h-screen grid grid-cols-3 items-center p-5 gap-4 ">
     {% if posts %}
     {% for post in posts %}

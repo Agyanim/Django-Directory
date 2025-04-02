@@ -94,6 +94,17 @@ def postDetails(request,id):
     return render(request,'postApp/post-details.html',context)
 
 def createPost(request):
+    if request.method == 'POST':
+        post = request.POST
+    
+        form = CreatePostForm(post)
+        if form.is_valid:
+            submission=form.save(commit=False)
+            print(submission.created_by)
+            submission.crated_by = request.user
+            submission.save()
+            print(submission.created_by)
+            return redirect('posts')  
     form = CreatePostForm
     context ={"form":form}
     return render(request,'postApp/create-post.html',context)
