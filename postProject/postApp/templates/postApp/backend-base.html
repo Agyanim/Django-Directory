@@ -12,6 +12,11 @@
 <body class="">
     <div class="rounded-2xl bg-gray-200/20 py-[0.1rem] mx-1 shadow-md shadow-white " style="position: relative;">
     {% include 'postApp/nav.html' %}
+    {% if user.is_authenticated %}
+<h3 class="absolute top-[5rem] left-[3rem] font-bold">{{user|upper}}</h3>
+{% else %}
+<h3 class="absolute top-[5.5rem] left-[3rem] font-bold uppercase">Guest</h3>
+{% endif %}
 
      {% block header %}  {% endblock %} <!--site header is place here -->
      

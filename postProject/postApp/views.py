@@ -70,18 +70,32 @@ def posts(request):
 def editPost(request,id):
     post_detail = Post.objects.get(id=id)
     if request.method == "POST":
-        form= CreatePostForm(request.POST, instance=post_detail)
-        if form.is_valid:
-            form.save()
-            return redirect('postDetail',id)
+        if post_detail.created_by == request.user:
+            form= CreatePostForm(request.POST, instance=post_detail)
+            if form.is_valid:
+                form.save()
+                return redirect('postDetail',id)
+        else:
+            messages.info(request,"Sorry, you are not authorized to modify this post.")
+            return redirect("editPost",id)
     else:
-        form=CreatePostForm(instance=post_detail)    
+        form=CreatePostForm(instance=post_detail) 
+        if post_detail.created_by != request.user:
+            messages.info(request,"Sorry, you are not authorized to modify this post.")
+            return redirect("postDetail",id)   
         context ={
             "form":form , 
             "post":post_detail,
             }
     return render(request,'postApp/edit-post.html',context)
 
+def deletePost(request,id):
+    if request.user:
+        post = Post.objects.get(id=id)
+        print(post)
+        post.delete()
+        return redirect('posts')
+    return render(request,'postApp/delete-post.html',{"id":id})
 def postDetails(request,id):
     form = CreatePostForm
    
@@ -94,18 +108,23 @@ def postDetails(request,id):
     return render(request,'postApp/post-details.html',context)
 
 def createPost(request):
+    form = CreatePostForm
     if request.method == 'POST':
         post = request.POST
-    
         form = CreatePostForm(post)
-        if form.is_valid:
+        
+        if form.is_valid and request.user =="":
             submission=form.save(commit=False)
-            print(submission.created_by)
-            submission.crated_by = request.user
+            submission.created_by = request.user
             submission.save()
-            print(submission.created_by)
             return redirect('posts')  
-    form = CreatePostForm
+        else:
+            messages.info(request,'Sign in to create new post')
+            return redirect('createPost')
+        # if User.is_authenticated:
+        # context ={"form":form}
+        # return redirect('createPost')
+    # messages.info(request,'Sign in to create new post')
     context ={"form":form}
     return render(request,'postApp/create-post.html',context)
     

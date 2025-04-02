@@ -5,9 +5,11 @@
 
 
 
-{% block content %}
-
 <section class="flex justify-center items-center mt-[5rem]">
+    {% block content %}
+    {% for message in messages %}
+    <h1>{{message}}</h1>
+    {% endfor %}
 
     <form  class="w-[30%] m-auto bg-green-900/5 rounded-md shadow-lg shadow-black " method="POST" action="{% url 'createPost' %}">
     
