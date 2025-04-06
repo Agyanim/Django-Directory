@@ -13,13 +13,36 @@
     <nav class="flex  mx-10 mt-5 justify-between">
         <div class="w-14"><a href="{% url 'index' %}"><img class=" w-full rounded-full" src="{% static 'postApp/images/logo_1.png' %}" alt="logo"></a></div>
         <ul class="flex space-x-5 font-bold text-[1.2rem] text-green-800">
+            {% if request.path == '/' %}
+            <li class="text-gray-600/50"><a href="{% url 'index' %}">Home</a></li>
+            {% else%}
             <li><a href="{% url 'index' %}">Home</a></li>
+            {%endif %}
+
+            {% if request.path == '/about/' %}
+            <li class="text-gray-600/50"><a href="{% url 'about' %}">About</a></li>
+            {% else%}
             <li><a href="{% url 'about' %}">About</a></li>
+            {%endif %}
+
+            {% if request.path == '/posts/' %}
+            <li class="text-gray-600/50"><a href="{% url 'posts' %}">Posts</a></li>
+            {% else%}
             <li><a href="{% url 'posts' %}">Posts</a></li>
+            {%endif %}
+
             {% if user.is_authenticated %}
-            <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% if request.path == '/signup/' %}
+                <li class="text-gray-600/50"></li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else%}
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+                {%endif %}
             {% else %}
-            <li><a href="{% url 'signup' %}">Signup/Login</a></li>
+                {% if request.path == '/signup/' or request.path == '/login/' %}
+                <li class="text-gray-600/50"><a href="{% url 'signup' %}">Signup/Login</a></li>
+                {% else%}
+                <li><a href="{% url 'signup' %}">Signup/Login</a></li>
+                {% endif %}
             {% endif %}
         </ul>
     </nav>
