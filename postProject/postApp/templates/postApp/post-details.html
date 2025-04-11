@@ -18,9 +18,10 @@
 <a class=" rounded-full bg-green-900 text-white shadow-md shadow-black w-20 text-center py-1 font-bold hover:opacity-80 hover:translate-y-2 transition-all border-none" href="{% url 'posts' %}">Posts</a>
 <a class=" rounded-full bg-green-900 text-white shadow-md shadow-black w-28 text-center py-1 font-bold hover:opacity-80 hover:translate-y-2 transition-all border-none" href="{% url 'createPost' %}">New Post</a>
 <a class=" rounded-full bg-green-900 text-white shadow-md shadow-black w-20 text-center py-1 font-bold hover:opacity-80 hover:translate-y-2 transition-all border-none" href="{% url 'editPost' post.id %}">Edit</a>
-<a class="rounded-full bg-red-900 text-white shadow-md shadow-black w-20 text-center py-1 font-bold hover:opacity-80 hover:translate-y-2 transition-all border-none" href="{% url 'deletePost' post.id %}">Delete</a>
+<a class="rounded-full bg-red-900 text-white shadow-md shadow-black w-20 text-center py-1 font-bold hover:opacity-80 hover:translate-y-2 transition-all border-none" href="{% url 'warning' post.id %}">Delete</a>
 {% else %}
-<h2>signin to create new post</h2>
+<a class="font-bold text-green-900 hover:text-gray-600 italic" href="{% url 'login' %}">Login to create post</a>
+
 {% endif %}
 </div>  
 {% endblock %}

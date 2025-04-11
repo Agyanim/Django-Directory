@@ -90,12 +90,29 @@ def editPost(request,id):
     return render(request,'postApp/edit-post.html',context)
 
 def deletePost(request,id):
-    if request.user:
+    if request.user.is_authenticated:
         post = Post.objects.get(id=id)
-        print(post)
-        post.delete()
-        return redirect('posts')
+        if post.created_by == request.user:
+            post.delete()
+            return redirect('posts')
+        else:
+            messages.info(request,'Sorry, you are not authorized to delete this post')
+            return redirect('postDetail', id)
     return render(request,'postApp/delete-post.html',{"id":id})
+
+
+def warning(request,id):
+    if request.user.is_authenticated:
+        post = Post.objects.get(id=id)
+        if post.created_by == request.user:
+            return render(request,'postApp/delete-post.html',{"id":id})
+        else:
+            messages.info(request,'Sorry, you are not authorized to delete this post')
+            return redirect('postDetail',id)
+        
+
+    
+
 def postDetails(request,id):
     form = CreatePostForm
    
@@ -108,23 +125,20 @@ def postDetails(request,id):
     return render(request,'postApp/post-details.html',context)
 
 def createPost(request):
+    print(type(request.user))
     form = CreatePostForm
     if request.method == 'POST':
         post = request.POST
         form = CreatePostForm(post)
         
-        if form.is_valid and request.user =="":
+        if form.is_valid and request.user.is_authenticated:
             submission=form.save(commit=False)
             submission.created_by = request.user
             submission.save()
             return redirect('posts')  
         else:
-            messages.info(request,'Sign in to create new post')
+            messages.info(request,'Sign in to create post')
             return redirect('createPost')
-        # if User.is_authenticated:
-        # context ={"form":form}
-        # return redirect('createPost')
-    # messages.info(request,'Sign in to create new post')
     context ={"form":form}
     return render(request,'postApp/create-post.html',context)
     
