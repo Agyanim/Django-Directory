@@ -38,7 +38,7 @@ virtualenvwrapper-win==1.2.7
 #########Key Notes #################
 
 
-pip freeze > requirement.txt
+pip freeze > requirements.txt
 pip install requirements.txt
 
 {% load widget_tweaks %}
